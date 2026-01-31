@@ -44,14 +44,14 @@ Pod::Spec.new do |s|
   s.dependency 'Flutter'
   s.platform = :ios, '11.0'
 
-  # v3.5.11
+  # v3.5.18
   s.subspec 'vendor' do |sp|
-    sp.vendored_frameworks = 'Libraries/*.framework'
+    sp.vendored_frameworks = 'Libraries/*.xcframework'
     sp.frameworks = 'Security', 'SystemConfiguration', 'CoreGraphics', 'CoreTelephony', 'WebKit'
     sp.libraries = 'iconv', 'sqlite3', 'stdc++', 'z'
     sp.requires_arc = true
   end
 
   # Flutter.framework does not contain a i386 slice.
-  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
+  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386', 'OTHER_LDFLAGS' => '-ObjC' }
 end
